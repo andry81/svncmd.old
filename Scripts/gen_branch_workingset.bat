@@ -668,7 +668,8 @@ set /P ICONV_DEFAULT_ANSI_LOCALE=< "%CONTOOLS_VARS_ROOT%/vars/iconv.default_ansi
 call "%%CONTOOLS_ROOT%%/encoding/ansi2any.bat" "%%ICONV_DEFAULT_ANSI_LOCALE%%" UTF-8 "%%BRANCH_ROOT_ALLFILES_FILE%%" > "%BRANCH_ROOT_ALL_FILES_LIST_FILE_TMP%"
 
 copy /Y /B "%BRANCH_ROOT_ALL_FILES_LIST_FILE_TMP%" "%BRANCH_ROOT_ALLFILES_NAME%%BRANCH_ROOT_ALLFILES_EXT%" >nul
-del /F /Q /A:-D "%BRANCH_ROOT_ALL_FILES_LIST_FILE_TMP%"
+rem CAUTION: must check on empty variable to avoid accidental `del /Q ""` case
+if defined BRANCH_ROOT_ALL_FILES_LIST_FILE_TMP del /F /Q /A:-D "%BRANCH_ROOT_ALL_FILES_LIST_FILE_TMP%"
 
 exit /b
 
@@ -865,7 +866,8 @@ set "SED_REPLACE_STR=Working Copy Root Path: ."
 type "%~f1" | "%CONTOOLS_MSYS2_USR_ROOT%/bin/sed.exe" -b -e "s|%SED_SEARCH_STR%|%SED_REPLACE_STR%|img" > "%BRANCH_EXTERNALS_INFO_FILE_TMP%"
 
 copy /Y /B "%BRANCH_EXTERNALS_INFO_FILE_TMP%" "%~f1" >nul
-del /F /Q /A:-D "%BRANCH_EXTERNALS_INFO_FILE_TMP%"
+rem CAUTION: must check on empty variable to avoid accidental `del /Q ""` case
+if defined BRANCH_EXTERNALS_INFO_FILE_TMP del /F /Q /A:-D "%BRANCH_EXTERNALS_INFO_FILE_TMP%"
 
 exit /b
 
@@ -1004,7 +1006,8 @@ if %ERRORLEVEL% NEQ 0 (
 ) >&2
 
 copy /Y /B "%BRANCH_EXTERNALS_LIST_FILE_TMP%" "%BRANCH_EXTERNALS_FILE%" >nul
-del /F /Q /A:-D "%BRANCH_EXTERNALS_LIST_FILE_TMP%"
+rem CAUTION: must check on empty variable to avoid accidental `del /Q ""` case
+if defined BRANCH_EXTERNALS_LIST_FILE_TMP del /F /Q /A:-D "%BRANCH_EXTERNALS_LIST_FILE_TMP%"
 
 exit /b
 

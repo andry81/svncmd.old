@@ -267,6 +267,7 @@ if "%SVN_FILE_PATH%" == "." exit /b 0
 if "%SVN_FILE_PATH:~-1%" == "/" (
   rmdir /Q "%SVN_FILE_PATH:/=\%" 2>nul && echo;- "%EXTERNAL_BRANCH_PATH%/%SVN_FILE_PATH%"
 ) else (
+  rem CAUTION: must check on empty variable to avoid accidental `del /Q ""` case
   del /F /Q /A:-D "%SVN_FILE_PATH:/=\%" 2>nul && echo;- "%EXTERNAL_BRANCH_PATH%/%SVN_FILE_PATH%"
 )
 

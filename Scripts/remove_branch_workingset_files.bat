@@ -49,6 +49,8 @@ exit /b 0
 
 :DEL_FILE_IF_EXIST
 set "FROMTO_PATH=%~f1"
+rem CAUTION: must check on empty variable to avoid accidental `del /Q ""` case
+if not defined "%FROMTO_PATH%" exit /b 255
 if not exist "%FROMTO_PATH%" exit /b 255
 echo;^>del %2 %3 %4 %5 %6 %7 %8 %9 "%FROMTO_PATH%"
 del %2 %3 %4 %5 %6 %7 %8 %9 "%FROMTO_PATH%"
@@ -56,6 +58,8 @@ exit /b
 
 :RMDIR_IF_EXIST
 set "FROMTO_PATH=%~f1"
+rem CAUTION: must check on empty variable to avoid accidental `del /Q ""` case
+if not defined "%FROMTO_PATH%" exit /b 255
 if not exist "%FROMTO_PATH%\" exit /b 255
 echo;^>rmdir %2 %3 %4 %5 %6 %7 %8 %9 "%FROMTO_PATH%"
 rmdir %2 %3 %4 %5 %6 %7 %8 %9 "%FROMTO_PATH%"

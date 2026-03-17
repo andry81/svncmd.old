@@ -966,6 +966,7 @@ if exist "%BRANCH_FILE_PATH%\" (
   call :CMD rmdir /Q "%%BRANCH_FILE_PATH:/=\%%" || exit /b 114
   exit /b 0
 )
+rem CAUTION: must check on empty variable to avoid accidental `del /Q ""` case
 call :CMD del /F /Q /A:-D "%%BRANCH_FILE_PATH:/=\%%" || exit /b 115
 exit /b 0
 
